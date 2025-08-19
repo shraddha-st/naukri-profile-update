@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>NaukriProfileUpdater</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+
+    <dependencies>
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.33.0</version>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>4.33.0</version>
+        </dependency>
+
+        <!--
+        https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v137 -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v137</artifactId>
+            <version>4.33.0</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    </properties>
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
+            <configuration>
+                <!--					<compilerVersion>17</compilerVersion>
+-->
+                <source>17</source>
+                <target>17</target>
+                <!--<source>1.8</source> 1.8
+                <target>1.8</target>-->
+                <release>17</release>
+                <fork>true</fork>
+                <compilerArgs>
+                    <!--<arg>-bootclasspath</arg>
+                    <arg>${JAVA_HOME}/jre/lib/rt.jar</arg>-->
+                    <!--<arg>add-opens</arg>-->
+                    <!--						<arg>jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+-->                    </compilerArgs>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <!--				<version>3.0.0-M4</version>
+-->
+            <version>3.5.3</version>
+            <configuration>
+                <suiteXmlFiles>
+                    <suiteXmlFile>src/test/resources/testngFramework.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <!--<groups>${category}</groups> -->
+                <!--<argLine>add-opens jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</argLine>-->
+                <argLine>--add-opens java.base/java.lang=ALL-UNNAMED
+                    --add-opens jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED
+                </argLine>
+            </configuration>
+        </plugin>
+    </plugins>
+    </build>
+</project>
