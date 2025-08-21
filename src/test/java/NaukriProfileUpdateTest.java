@@ -35,11 +35,11 @@ public class NaukriProfileUpdateTest {
 
             // Login
             driver.findElement(By.id("usernameField"))
-                    .sendKeys("sakhi.mali.work@gmail.com"); // from GitHub secret
-//                    .sendKeys(System.getenv("NAUKRI_USER")); // from GitHub secret
+//                    .sendKeys("sakhi.mali.work@gmail.com");
+                    .sendKeys(System.getenv("NAUKRI_USER")); // from GitHub secret
             driver.findElement(By.id("passwordField"))
-                    .sendKeys("DRftgyhu@25"); // from GitHub secret
-//                    .sendKeys(System.getenv("NAUKRI_PASS")); // from GitHub secret
+//                    .sendKeys("DRftgyhu@25");
+                    .sendKeys(System.getenv("NAUKRI_PASS")); // from GitHub secret
             driver.findElement(By.xpath("//button[text()='Login']")).click();
 
             Thread.sleep(5000);
