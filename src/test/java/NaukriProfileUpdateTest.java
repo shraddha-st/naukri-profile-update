@@ -68,7 +68,7 @@ public class NaukriProfileUpdateTest {
             driver.navigate().to
                     ("https://www.naukri.com/mnjuser/profile");
             Thread.sleep(5000);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 
             // Example: click “update” button to refresh profile
