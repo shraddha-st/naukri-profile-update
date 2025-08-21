@@ -1,0 +1,33 @@
+name: Daily Naukri Profile Update
+
+on:
+  schedule:
+    - cron: "0 5 * * *"  # every day at 7:10 AM UTC (~10:30 AM IST)
+  workflow_dispatch:     # allow manual trigger too
+
+jobs:
+  update-profile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run TestNG (Profile Update)
+        env:
+          NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
+          NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+        run: mvn test -Dtest=NaukriProfileUpdateTest
