@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
@@ -38,14 +39,29 @@ public class NaukriProfileUpdateTest {
 
 
             // Login
-            driver.findElement(By.id("usernameField"))
-//                    .sendKeys("sakhi.mali.work@gmail.com");
-                    .sendKeys(System.getenv("NAUKRI_USER")); // from GitHub secret
-            driver.findElement(By.id("passwordField"))
-//                    .sendKeys("DRftgyhu@25");
-                    .sendKeys(System.getenv("NAUKRI_PASS")); // from GitHub secret
-            driver.findElement(By.xpath("//button[text()='Login']")).click();
 
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+            WebElement username = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.id("usernameField"))
+            );
+//            driver.findElement(By.id("usernameField"))
+//                    username.sendKeys("sakhi.mali.work@gmail.com");
+            username.sendKeys(System.getenv("NAUKRI_USER")); // from GitHub secret
+
+            WebElement password = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.id("passwordField"))
+            );
+//            driver.findElement(By.id("passwordField"))
+//                    .sendKeys("DRftgyhu@25");
+            password.sendKeys(System.getenv("NAUKRI_PASS")); // from GitHub secret
+
+            WebElement loginBtn = wait.until(
+                    ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit']"))
+            );
+//            driver.findElement(By.xpath("//button[text()='Login']")).click();
+            loginBtn.click();
             Thread.sleep(5000);
 
             // Navigate to profile
