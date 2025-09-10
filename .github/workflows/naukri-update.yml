@@ -27,7 +27,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Run TestNG (Profile Update)
-        env:
-          NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
-          NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
         run: mvn test -Dtest=NaukriProfileUpdateTest
