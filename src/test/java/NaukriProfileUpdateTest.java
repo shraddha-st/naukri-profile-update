@@ -17,11 +17,14 @@ public class NaukriProfileUpdateTest {
 
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--headless");  // headless mode
-        options.addArguments("--headless=new");
+//        options.addArguments("--headless=new");
+        options.addArguments("--incognito");
+
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
-        options.addArguments("--remote-allow-origins=*");        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--user-data-dir=/tmp/chrome-" + System.currentTimeMillis());
 
         WebDriver driver = new ChromeDriver(options);
@@ -47,15 +50,15 @@ public class NaukriProfileUpdateTest {
                     ExpectedConditions.visibilityOfElementLocated(By.id("usernameField"))
             );
 //            driver.findElement(By.id("usernameField"))
-//                    username.sendKeys("sakhi.mali.work@gmail.com");
-            username.sendKeys(System.getenv("NAUKRI_USER")); // from GitHub secret
+                    username.sendKeys("sakhi.mali.work@gmail.com");
+//            username.sendKeys(System.getenv("NAUKRI_USER")); // from GitHub secret
 
             WebElement password = wait.until(
                     ExpectedConditions.visibilityOfElementLocated(By.id("passwordField"))
             );
 //            driver.findElement(By.id("passwordField"))
-//                    .sendKeys("DRftgyhu@25");
-            password.sendKeys(System.getenv("NAUKRI_PASS")); // from GitHub secret
+            password.sendKeys("DRftgyhu@25");
+//            password.sendKeys(System.getenv("NAUKRI_PASS")); // from GitHub secret
 
             WebElement loginBtn = wait.until(
                     ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit']"))
@@ -98,6 +101,13 @@ public class NaukriProfileUpdateTest {
 
             System.out.println("✅ Profile refreshed successfully!");
 
+            WebElement userDrawer = driver.findElement((By.xpath("//div[@class='nI-gNb-drawer__icon-img-wrapper']")));
+            userDrawer.click();
+            Thread.sleep(5000);
+
+            WebElement userLogout = driver.findElement((By.xpath("//a[@title='Logout']")));
+            userLogout.click();
+            Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
